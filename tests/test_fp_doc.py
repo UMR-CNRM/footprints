@@ -61,8 +61,8 @@ class utDoc(TestCase):
         )
 
     def test_doc_slurp(self):
-        self.assertEqual("\n".join([l.rstrip(" ")
-                                    for l in doc.format_docstring(self.fp, 2).split("\n")]),
+        self.assertEqual("\n".join([line.rstrip(" ")
+                                    for line in doc.format_docstring(self.fp, 2).split("\n")]),
                          expected_doc_v1)
 
 

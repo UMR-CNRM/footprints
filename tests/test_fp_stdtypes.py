@@ -10,19 +10,19 @@ from footprints import FootprintBase, FPDict, FPList, FPSet, FPTuple
 
 class FootprintTestBuiltins(FootprintBase):
     _footprint = dict(
-        info = 'Test builtins wrappers as attributes',
-        attr = dict(
-            thedict = dict(
-                type = FPDict,
+        info='Test builtins wrappers as attributes',
+        attr=dict(
+            thedict=dict(
+                type=FPDict,
             ),
-            thelist = dict(
-                type = FPList,
+            thelist=dict(
+                type=FPList,
             ),
-            theset = dict(
-                type = FPSet,
+            theset=dict(
+                type=FPSet,
             ),
-            thetuple = dict(
-                type = FPTuple,
+            thetuple=dict(
+                type=FPTuple,
             ),
             thedefaultdict=dict(
                 type=FPDict,

@@ -201,11 +201,11 @@ class utReporting(TestCase):
         self.assertEqual(xmlreport.dump_last(), expected_xml_last)
         expected_iter = dict()
         for logentry in rv.last:
-            expected_iter.update({logentry.name + '_' + l['name']: l['why']
-                                  for l in logentry})
+            expected_iter.update({logentry.name + '_' + line['name']: line['why']
+                                  for line in logentry})
         reformatted_report = dict()
-        for l in xmlreport.iter_last():
-            reformatted_report[l['classname'] + '_' + l['name']] = l['why']
+        for line in xmlreport.iter_last():
+            reformatted_report[line['classname'] + '_' + line['name']] = line['why']
         self.assertDictEqual(reformatted_report, expected_iter)
 
         # Global as_dict

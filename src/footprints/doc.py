@@ -132,7 +132,7 @@ def _formating_sphinx_v1(fp, abstractfpobj=False):
             out.append("     * **{}** is an alias of {}.".format(k, v))
         out.append('')
 
-    return '\n'.join([indent + l for l in out])
+    return '\n'.join([indent + line for line in out])
 
 
 # Default function for docstrings formating

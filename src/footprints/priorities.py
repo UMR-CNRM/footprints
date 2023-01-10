@@ -106,8 +106,8 @@ class PrioritySet(object):
         self._freeze = dict(default=self._levels[:])
 
     def __iter__(self):
-        for l in self._levels:
-            yield l
+        for line in self._levels:
+            yield line
 
     def __call__(self):
         return tuple(self._levels)

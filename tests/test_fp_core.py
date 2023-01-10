@@ -49,29 +49,29 @@ class Foo(object):
 class FootprintTestOne(FootprintBase):
     _footprint = [
         dict(
-            info = 'Test class',
-            attr = dict(
-                kind = dict(
-                    values = ['hip', 'hop'],
-                    alias = ('stuff',),
-                    remap = dict(foo='hop')
+            info='Test class',
+            attr=dict(
+                kind=dict(
+                    values=['hip', 'hop'],
+                    alias=('stuff',),
+                    remap=dict(foo='hop')
                 ),
-                somestr = dict(
-                    values = ['this', 'or', 'that'],
-                    optional = True,
-                    default = 'this'
+                somestr=dict(
+                    values=['this', 'or', 'that'],
+                    optional=True,
+                    default='this'
                 )
             )
         ),
         dict(
-            attr = dict(
-                someint = dict(
-                    values = list(range(10)),
-                    type = int,
+            attr=dict(
+                someint=dict(
+                    values=list(range(10)),
+                    type=int,
                 ),
-                someMixedCase = dict(
-                    optional = True,
-                    values = ['why ?', 'toto'],
+                someMixedCase=dict(
+                    optional=True,
+                    values=['why ?', 'toto'],
                 )
             )
         )
@@ -85,16 +85,16 @@ class FootprintTestOne(FootprintBase):
 class FootprintTestTwo(FootprintTestOne):
     _mkshort = True
     _footprint = dict(
-        info = 'Another test class',
-        attr = dict(
-            kind = dict(
-                values = ['hip', 'hop', 'poom'],
+        info='Another test class',
+        attr=dict(
+            kind=dict(
+                values=['hip', 'hop', 'poom'],
             ),
-            somefoo = dict(
-                type = Foo
+            somefoo=dict(
+                type=Foo
             ),
-            someint = dict(
-                outcast = (2, 7)
+            someint=dict(
+                outcast=(2, 7)
             )
         )
     )
@@ -104,20 +104,20 @@ class FootprintTestTwo(FootprintTestOne):
 
 class FootprintTestRWD(FootprintBase):
     _footprint = dict(
-        info = 'Test attributes access',
-        attr = dict(
-            someint = dict(
-                type = int,
-                access = 'rwx',
-                outcast = (2, 7)
+        info='Test attributes access',
+        attr=dict(
+            someint=dict(
+                type=int,
+                access='rwx',
+                outcast=(2, 7)
             ),
-            somefoo = dict(
-                type = Foo,
-                access = 'rxx'
+            somefoo=dict(
+                type=Foo,
+                access='rxx'
             ),
-            somestr = dict(
-                access = 'rwd',
-                values = ('one', 'two', 'five')
+            somestr=dict(
+                access='rwd',
+                values=('one', 'two', 'five')
             )
         )
     )
@@ -125,12 +125,12 @@ class FootprintTestRWD(FootprintBase):
 
 class FooFP(FootprintBase):
     _footprint = dict(
-        info = 'To test footprint class as footprint attributes (see FootprintTestFpAttr)',
-        attr = dict(
-            blop = dict(
-                type = int,
+        info='To test footprint class as footprint attributes (see FootprintTestFpAttr)',
+        attr=dict(
+            blop=dict(
+                type=int,
             ),
-            scrontch = dict(
+            scrontch=dict(
             ),
         )
     )
@@ -138,15 +138,15 @@ class FooFP(FootprintBase):
 
 class FootprintTestFpAttr(FootprintTestOne):
     _footprint = dict(
-        info = 'Yet another test class',
-        attr = dict(
-            somefoo = dict(
-                type = FooFP
+        info='Yet another test class',
+        attr=dict(
+            somefoo=dict(
+                type=FooFP
             ),
-            somestr = dict(
-                optional = False,
-                values = [1, 2],
-                type = int
+            somestr=dict(
+                optional=False,
+                values=[1, 2],
+                type=int
             )
         )
     )
@@ -1381,7 +1381,11 @@ class utFootprintBase(TestCase):
             __name__ + '.FootprintTestTwo': {}
         })
 
-        rv, attr_input = FootprintTestFpAttr.footprint_couldbe(dict(kind='hip', someint=1, somestr=1, somefoo=FooFP(blop=1, scrontch='hello')), mkreport=True)
+        rv, attr_input = FootprintTestFpAttr.footprint_couldbe(dict(kind='hip',
+                                                                    someint=1,
+                                                                    somestr=1,
+                                                                    somefoo=FooFP(blop=1, scrontch='hello')),
+                                                               mkreport=True)
         self.assertTrue(rv)
         self.assertSetEqual(attr_input, set(['kind', 'someint', 'somestr', 'somefoo']))
         self.assertDictEqual(report.last.as_dict(), {
@@ -1390,7 +1394,11 @@ class utFootprintBase(TestCase):
 
         # How does it react when somefoo can not be reclassed inte a FooFP type ?
         a_foo = Foo(1)
-        rv, attr_input = FootprintTestFpAttr.footprint_couldbe(dict(kind='hip', someint=1, somestr=1, somefoo=a_foo), mkreport=True)
+        rv, attr_input = FootprintTestFpAttr.footprint_couldbe(dict(kind='hip',
+                                                                    someint=1,
+                                                                    somestr=1,
+                                                                    somefoo=a_foo),
+                                                               mkreport=True)
         self.assertFalse(rv)
         self.assertSetEqual(attr_input, set(['kind', 'someint', 'somestr']))
         self.assertDictEqual(report.last.as_dict(), {
@@ -1461,8 +1469,8 @@ class utCollector(TestCase):
     def test_collector_methods(self):
         col = collectors.get()
         with capture(col.show_attrkeys) as output:
-            self.assertEqual("\n".join([l.rstrip(' ') for l in output.split("\n")
-                                        if not re.search(r' (the|very)', l)]),
+            self.assertEqual("\n".join([line.rstrip(' ') for line in output.split("\n")
+                                        if not re.search(r' (the|very)', line)]),
                              expected_keys)
 
 
