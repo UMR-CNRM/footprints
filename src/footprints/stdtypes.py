@@ -9,7 +9,7 @@ import re
 from bronx.syntax.decorators import secure_getattr
 
 #: Automatic export
-__all__ = ['FPDict', 'FPList', 'FPSet', 'FPTuple', 'FPRegex']
+__all__ = ['FPDict', 'FPList', 'FPSet', 'FPStr', 'FPTuple', 'FPRegex']
 
 
 class FPDict(dict):
@@ -45,6 +45,11 @@ class FPSet(set):
             return sorted(self)
         except TypeError:
             return list(self)
+
+
+class FPStr(str):
+    """A str type for FootPrints arguments (without expansion)."""
+    pass
 
 
 class FPTuple(tuple):

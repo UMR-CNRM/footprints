@@ -6,7 +6,7 @@ import tempfile
 
 from bronx.fancies import loggers
 
-from footprints import util, FPList
+from footprints import util, FPList, FPStr
 
 
 class Foo:
@@ -342,6 +342,12 @@ class utExpand(TestCase):
         self.assertListEqual(rv, [
             {'arg': 'hip', 'item': FPList([1, 2, 3]), 'index_expansion': 1},
             {'arg': 'hop', 'item': FPList([1, 2, 3]), 'index_expansion': 2},
+        ])
+
+        rv = util.expand(dict(arg=('hip', 'hop'), item=FPStr("a,b,c")))
+        self.assertListEqual(rv, [
+            {'arg': 'hip', 'item': FPStr("a,b,c"), 'index_expansion': 1},
+            {'arg': 'hop', 'item': FPStr("a,b,c"), 'index_expansion': 2},
         ])
 
 
