@@ -211,6 +211,18 @@ def expand(desc):
     Explanation: The files currently in the working directory are matched using regular
     expressions. If the filename matches, some matching parts may be re-used to fill
     other keys in the dictionary.
+
+    Prevent Expansion::
+    Use the containers ``footprints.stdtypes.FPDict``, ``footprints.stdtypes.FPList``,
+    ``footprints.stdtypes.FPSet``, ``footprints.stdtypes.FPStr`` or 
+    ``footprints.stdtypes.FPTuple`` to avoid expansion.
+        >>> (expand({ 'test': 'alpha', 'niv2': footprints.stdtypes.FPList([ 'a', 'b', 'c' ])}) ==
+        ...  [{'test': 'alpha', 'niv2': footprints.stdtypes.FPList([ 'a', 'b', 'c' ]), 'index_expansion': 1}])
+        True
+
+        >>> (expand({'test': 'alpha', 'niv2': footprints.stdtypes.FPStr('x,y,z'}) ==
+        ...  [{'test': 'alpha', 'niv2': footprints.stdtypes.FPStr('x,y,z'), 'index_expansion': 1}])
+        True
     """
     ld = deque([desc, ])
     todo = True

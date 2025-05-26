@@ -15,12 +15,13 @@ from bronx.patterns import observer
 
 from . import access, collectors, config, doc
 from . import priorities, proxies, reporting, util
-from .stdtypes import FPDict, FPList, FPRegex, FPSet, FPTuple
+from .stdtypes import FPDict, FPList, FPRegex, FPSet, FPStr, FPTuple
 
 assert FPDict
 assert FPList
 assert FPRegex
 assert FPSet
+assert FPStr
 assert FPTuple
 
 
